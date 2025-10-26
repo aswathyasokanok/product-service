@@ -195,10 +195,10 @@ func TestNewRetryableErrorWithCause(t *testing.T) {
 		Cause:   nil,
 	}
 
-	err := NewRetryableErrorWithCause("retryable error message", cause)
+	err := NewRetryableError("retryable error message", cause)
 
 	if err.Type != RetryableError {
-		t.Errorf("Expected Type RetryableError, got %s", err.Type.String())
+		t.Errorf("Expected Type RetryableError, got %s", fmt.Sprintf("%s", err.Type))
 	}
 	if err.Message != "retryable error message" {
 		t.Errorf("Expected Message 'retryable error message', got '%s'", err.Message)
@@ -218,10 +218,10 @@ func TestNewNonRetryableErrorWithCause(t *testing.T) {
 		Cause:   nil,
 	}
 
-	err := NewNonRetryableErrorWithCause("non-retryable error message", cause)
+	err := NewNonRetryableError("non-retryable error message", cause)
 
 	if err.Type != NonRetryableError {
-		t.Errorf("Expected Type NonRetryableError, got %s", err.Type.String())
+		t.Errorf("Expected Type NonRetryableError, got %s", fmt.Sprintf("%s", err.Type))
 	}
 	if err.Message != "non-retryable error message" {
 		t.Errorf("Expected Message 'non-retryable error message', got '%s'", err.Message)

@@ -58,8 +58,12 @@ func (m *MockEventQueue) Enqueue(event models.ProductEvent) error {
 }
 
 func (m *MockEventQueue) Dequeue() (models.ProductEvent, bool) {
-	event, ok := <-m.events
-	return event, ok
+	select {
+	case event, ok := <-m.events:
+		return event, ok
+	default:
+		return models.ProductEvent{}, false
+	}
 }
 
 func (m *MockEventQueue) Close() {
